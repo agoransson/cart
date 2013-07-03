@@ -217,6 +217,23 @@ class Cart
     }
 
     /**
+     * The total weight of the cart (used for a specific project)
+     * 
+     * @param  boolean $unique Just return unique items?
+     * @return int             Total number of items
+     */
+    public function totalWeight($unique = false)
+    {
+        $total = 0;
+
+        foreach ($this->contents() as $item) {
+            $total += $unique ? $item->weight : ($item->weight * $item->quantity);
+        }
+
+        return $total;
+    }
+
+    /**
      * Set the currency object
      * 
      * @param \Moltin\Currency\Currency $currency The currency object
